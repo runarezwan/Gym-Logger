@@ -1,40 +1,46 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/context/theme-context";
+import { AuthContextProvider } from "@/context/auth-context";
+import { SettingsProvider } from "@/context/settings-context";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const geist = Geist({
   subsets: ["latin"],
+  variable: "--font-geist",
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
+  variable: "--font-geist-mono",
 });
 
 export const metadata: Metadata = {
-  title: "Gym Logger",
-  description: "A minimal workout logger for the gym",
-  manifest: "/manifest.json",
-};
-
-export const viewport: Viewport = {
-  themeColor: "#4f46e5",
-  width: "device-width",
-  initialScale: 1,
+  title: "Gym Logger — Elite Performance Tracker",
+  description: "Beautiful, fast, and professional gym logger built with Next.js",
+  icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geist.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
+        <ThemeProvider>
+          <AuthContextProvider>
+            <SettingsProvider>
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+            </SettingsProvider>
+          </AuthContextProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

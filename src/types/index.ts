@@ -1,20 +1,46 @@
-import { Timestamp } from 'firebase/firestore';
+export type Category = 'Legs' | 'Back' | 'Chest' | 'Shoulders' | 'Arms' | 'Core' | 'Cardio' | 'Other';
+
+export interface Movement {
+  id: string;
+  name: string;
+  category: Category;
+  isCustom: boolean;
+}
 
 export interface WorkoutEntry {
-  movement: string;
+  id: string;
+  movementName: string;
   reps: number;
   weight: number;
+  unit: 'kg' | 'lbs';
+  notes: string;
+  createdAt: number;
 }
 
 export interface Workout {
-  id?: string;
-  date: Timestamp;
+  id: string;
+  date: string; // YYYY-MM-DD
   entries: WorkoutEntry[];
-  createdAt: Timestamp;
+  createdAt: number;
+  completed: boolean;
 }
 
-export interface WorkoutFormData {
-  movement: string;
-  reps: string; // use string for form input, convert later
-  weight: string;
+export interface TemplateEntry {
+  movementName: string;
+  reps: number;
+  weight: number;
+  unit: 'kg' | 'lbs';
+}
+
+export interface Template {
+  id: string;
+  name: string;
+  entries: TemplateEntry[];
+  createdAt: number;
+  order: number;
+}
+
+export interface UserSettings {
+  unit: 'kg' | 'lbs';
+  theme: 'system' | 'light' | 'dark';
 }
