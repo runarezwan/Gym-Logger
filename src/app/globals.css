@@ -20,12 +20,18 @@
   --color-danger: var(--danger);
   --color-danger-hover: var(--danger-hover);
   --color-warning: var(--warning);
+  --color-navy: #09090b;
+  --color-electric-purple: #a855f7;
+  --color-slate-500: #64748b;
+  --color-slate-400: #94a3b8;
+  --color-slate-600: #475569;
 
   --shadow-card: var(--card-shadow);
   --shadow-card-hover: var(--card-shadow-hover);
   --shadow-card-pressed: var(--card-shadow-pressed);
   --shadow-card-lg: var(--card-shadow-lg);
   --shadow-btn: var(--btn-shadow);
+  --shadow-glow-pulse: 0 0 15px rgba(59, 130, 246, 0.5);
 
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-out-standard: cubic-bezier(0.0, 0.0, 0.2, 1);
@@ -144,6 +150,7 @@ body {
 
 .animate-fade-in { animation: fadeIn 300ms var(--ease-out-standard) forwards; }
 .animate-slide-up { animation: slideUp 400ms var(--ease-spring) forwards; }
+.animate-modal-in { animation: modalIn 500ms var(--ease-spring) forwards; }
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
