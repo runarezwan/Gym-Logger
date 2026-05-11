@@ -30,8 +30,9 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
       
-      // Auto-seed on first login
+      // Auto-seed on first login in background
       if (currentUser) {
          try {
            await seedDefaultMovements(currentUser.uid);
@@ -58,8 +59,6 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
             console.error("Auto-seed failed", e);
          }
       }
-      
-      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
