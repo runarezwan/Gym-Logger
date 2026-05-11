@@ -1,65 +1,45 @@
-import type { Metadata, Viewport } from "next";
-import { Geist, Outfit } from "next/font/google";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 import { AuthContextProvider } from "@/context/auth-context";
-import { ThemeProvider } from "@/context/theme-context";
 import { SettingsProvider } from "@/context/settings-context";
-import AuthGuard from "@/components/auth-guard";
-import ErrorBoundary from "@/components/error-boundary";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const geist = Geist({
   subsets: ["latin"],
+  variable: "--font-geist",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const geistMono = Geist_Mono({
   subsets: ["latin"],
+  variable: "--font-geist-mono",
 });
 
 export const metadata: Metadata = {
-  title: "Gym Logger • Elite PWA",
-  description: "Mobile-first, high-performance strength tracking.",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "Gym Logger"
-  }
-};
-
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0f1a" },
-  ],
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  viewportFit: "cover",
+  title: "Gym Logger — Elite Performance Tracker",
+  description: "Beautiful, fast, and professional gym logger built with Next.js",
+  icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${geistSans.variable} ${outfit.variable} antialiased selection:bg-accent/30`}>
-        <AuthContextProvider>
-           <ThemeProvider>
-              <SettingsProvider>
-                 <AuthGuard>
-                    <ErrorBoundary>
-                       <div className="mx-auto max-w-lg min-h-screen relative overflow-x-hidden">
-                          {children}
-                       </div>
-                    </ErrorBoundary>
-                 </AuthGuard>
-              </SettingsProvider>
-           </ThemeProvider>
-        </AuthContextProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geist.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <AuthContextProvider>
+            <SettingsProvider>
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+            </SettingsProvider>
+          </AuthContextProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
