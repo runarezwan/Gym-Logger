@@ -13,7 +13,7 @@ import {
   deleteTemplate,
   reorderTemplates
 } from '@/lib/firestore';
-import { Template, Workout, TemplateEntry } from '@/types';
+import { Template, Workout, TemplateEntry, WorkoutEntry } from '@/types';
 import { ClipboardList, Plus, Play, Trash2, ChevronUp, ChevronDown, Check, Loader2, Save } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
