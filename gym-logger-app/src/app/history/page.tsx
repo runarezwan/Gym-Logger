@@ -12,7 +12,7 @@ import WorkoutList from '@/components/workout-list';
 export default function HistoryPage() {
   const { user } = useAuth();
   const [workouts, setWorkouts] = useState<Workout[]>([]);
-  const [prs, setPrs] = useState<Record<string, any>>({});
+  const [prs, setPrs] = useState<Record<string, { weight: number, reps: number }>>({});
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<{ id: string; name?: string } | null>(null);
@@ -57,6 +57,7 @@ export default function HistoryPage() {
   const getDayLabel = (dateStr: string) => {
      const d = new Date(dateStr);
      const today = new Date().toISOString().split('T')[0];
+     // eslint-disable-next-line react-hooks/purity
      const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
      
      if (dateStr === today) return "TODAY";

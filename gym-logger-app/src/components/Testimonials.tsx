@@ -10,7 +10,7 @@ export default function Testimonials() {
           { name: "Jamie L.", review: "Finally, a gym app that doesn't get in the way of my actual lifting. Highly recommended!" }
         ].map((item, i) => (
           <div key={i} className="flex flex-col justify-between rounded-lg border bg-background p-6 shadow-sm">
-            <p className="text-muted-foreground italic">"{item.review}"</p>
+            <p className="text-muted-foreground italic">&quot;{item.review}&quot;</p>
             <div className="mt-4 font-semibold">- {item.name}</div>
           </div>
         ))}

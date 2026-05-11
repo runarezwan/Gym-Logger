@@ -45,7 +45,8 @@ export default function TemplatesPage() {
       workoutId = await createWorkout(user.uid);
     }
 
-    const entries = t.entries.map(e => ({
+    const entries: WorkoutEntry[] = t.entries.map(e => ({
+       id: Math.random().toString(36).substr(2, 9),
        movementName: e.movementName,
        reps: e.reps,
        weight: e.weight,
@@ -54,7 +55,7 @@ export default function TemplatesPage() {
        createdAt: Date.now()
     }));
 
-    await addEntriesToWorkout(user.uid, workoutId, entries as any);
+    await addEntriesToWorkout(user.uid, workoutId, entries);
     
     setLoadingId(null);
     setSuccessId(t.id);

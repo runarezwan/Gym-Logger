@@ -35,18 +35,22 @@ export default function WorkoutForm({ onLog, lastEntry }: WorkoutFormProps) {
       const top = movements
         .filter(m => m.name.toLowerCase().includes(movement.toLowerCase()))
         .slice(0, 8);
-      setFiltered(top);
-      setShowDropdown(top.length > 0);
+      setTimeout(() => {
+        setFiltered(top);
+        setShowDropdown(top.length > 0);
+      }, 0);
     } else {
-      setShowDropdown(false);
+      setTimeout(() => setShowDropdown(false), 0);
     }
   }, [movement, movements]);
 
   // Handle smart defaults
   useEffect(() => {
     if (lastEntry) {
-      setReps(lastEntry.reps);
-      setWeight(lastEntry.weight);
+      setTimeout(() => {
+        setReps(lastEntry.reps);
+        setWeight(lastEntry.weight);
+      }, 0);
     }
   }, [lastEntry]);
 

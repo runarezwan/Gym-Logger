@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/context/auth-context';
 import { useSettings } from '@/context/settings-context';
-import { useTheme } from '@/context/theme-context';
+import { useTheme, Theme } from '@/context/theme-context';
 import AuthGuard from '@/components/auth-guard';
 import BottomNav from '@/components/bottom-nav';
 import { getWorkouts } from '@/lib/firestore';
@@ -86,7 +86,7 @@ export default function SettingsPage() {
                  ].map((t) => (
                    <button 
                      key={t.val}
-                     onClick={() => setTheme(t.val as any)}
+                     onClick={() => setTheme(t.val as Theme)}
                      className={`p-4 rounded-xl border flex flex-col items-center gap-2 transition-all ${theme === t.val ? 'bg-accent text-navy border-accent shadow-btn scale-[1.05]' : 'bg-bg-tertiary/10 text-text-tertiary border-white/5 shadow-inner'}`}
                    >
                       <t.icon className="w-4 h-4" />
@@ -109,7 +109,7 @@ export default function SettingsPage() {
                  ].map((u) => (
                    <button 
                      key={u.val}
-                     onClick={() => updateSettings({ unit: u.val as any })}
+                     onClick={() => updateSettings({ unit: u.val as 'kg' | 'lbs' })}
                      className={`p-5 rounded-xl border font-black uppercase italic tracking-[0.2em] transition-all text-xs ${settings.unit === u.val ? 'bg-accent text-navy border-accent shadow-btn scale-[1.05]' : 'bg-bg-tertiary/10 text-text-tertiary border-white/5 opacity-40 shadow-inner'}`}
                    >
                      {u.label}

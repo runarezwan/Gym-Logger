@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'system' | 'light' | 'dark';
+export type Theme = 'system' | 'light' | 'dark';
 
 interface ThemeContextType {
   theme: Theme;
@@ -16,7 +16,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem('gym-logger-theme') as Theme;
-    if (saved) setTheme(saved);
+    if (saved) {
+      setTimeout(() => setTheme(saved), 0);
+    }
   }, []);
 
   useEffect(() => {

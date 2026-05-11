@@ -42,10 +42,12 @@ export default function Home() {
   }, [user]);
 
   useEffect(() => {
-    fetchWorkout();
-    if (user) {
-       getPRs(user.uid).then(prs => setRecordCount(Object.keys(prs).length));
-    }
+    setTimeout(() => {
+      fetchWorkout();
+      if (user) {
+         getPRs(user.uid).then(prs => setRecordCount(Object.keys(prs).length));
+      }
+    }, 0);
   }, [fetchWorkout, user]);
 
   const handleLogSet = async (entryData: Omit<WorkoutEntry, 'id' | 'createdAt'>) => {

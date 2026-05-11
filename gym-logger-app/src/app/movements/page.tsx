@@ -74,7 +74,7 @@ export default function MovementsPage() {
                  {['All', ...CATEGORIES].map((c) => (
                    <button 
                      key={c} 
-                     onClick={() => setFilter(c as any)}
+                     onClick={() => setFilter(c as Category | 'All')}
                      className={`px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${filter === c ? 'bg-accent text-white shadow-btn' : 'bg-bg-tertiary text-text-secondary hover:text-accent'}`}
                    >
                      {c}

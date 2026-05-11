@@ -28,7 +28,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!user) {
-       setLoading(false);
+       setTimeout(() => setLoading(false), 0);
        return;
     }
     const fetchSettings = async () => {

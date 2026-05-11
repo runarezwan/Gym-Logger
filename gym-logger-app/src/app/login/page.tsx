@@ -20,7 +20,8 @@ export default function LoginPage() {
     setError(null);
     try {
       await login();
-    } catch (err: any) {
+    } catch (error) {
+      const err = error as { code?: string, message?: string };
       if (err.code === 'auth/popup-blocked') {
          await loginRedirect();
       } else {
