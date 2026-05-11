@@ -3,23 +3,17 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: "AIzaSyCjlmRZO_Vgxa72PYxb1tuqQZ83L3JSHf0",
+  authDomain: "gym-logger-runa-1337.firebaseapp.com",
+  projectId: "gym-logger-runa-1337",
+  storageBucket: "gym-logger-runa-1337.firebasestorage.app",
+  messagingSenderId: "526062178286",
+  appId: "1:526062178286:web:c8260d1ff88bd90f8a88ff",
 };
 
-let app;
-let db: any;
-let auth: any;
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+const db = getFirestore(app);
+const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
-
-if (firebaseConfig.apiKey && typeof window !== 'undefined') {
-  app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-  db = getFirestore(app);
-  auth = getAuth(app);
-}
 
 export { app, db, auth, googleProvider };
